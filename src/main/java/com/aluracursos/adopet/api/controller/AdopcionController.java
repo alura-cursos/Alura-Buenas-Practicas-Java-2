@@ -68,7 +68,7 @@ public class AdopcionController {
 
     @PutMapping("/aprobar")
     @Transactional
-    public ResponseEntity<String> aprovar(@RequestBody @Valid Adopcion adopcion) {
+    public ResponseEntity<String> aprobar(@RequestBody @Valid Adopcion adopcion) {
         adopcion.setStatus(StatusAdopcion.APROBADO);
         repository.save(adopcion);
 
