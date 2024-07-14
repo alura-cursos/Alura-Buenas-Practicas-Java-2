@@ -19,7 +19,7 @@ public class MascotaController {
     private MascotaRepository repository;
 
     @GetMapping
-    public ResponseEntity<List<Mascota>> listarTodosDisponibles() {
+    public ResponseEntity<List<Mascota>> listarTodasDisponibles() {
         List<Mascota> mascotas = repository.findAll();
         List<Mascota> disponibles = new ArrayList<>();
         for (Mascota mascota : mascotas) {
