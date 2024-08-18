@@ -1,4 +1,10 @@
 package com.aluracursos.adopet.api.dto;
 
-public record ReprobacionAdopcionDTO(Long idAdopcion, String justificacion) {
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
+public record ReprobacionAdopcionDTO(
+        @NotNull Long idAdopcion,
+        @NotBlank String justificacion
+) {
 }
