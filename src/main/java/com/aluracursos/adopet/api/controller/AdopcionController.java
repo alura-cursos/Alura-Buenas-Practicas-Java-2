@@ -1,9 +1,9 @@
 package com.aluracursos.adopet.api.controller;
 
-import com.aluracursos.adopet.api.dto.AprobacionAdopcionDto;
-import com.aluracursos.adopet.api.dto.ReprobacionAdopcionDto;
-import com.aluracursos.adopet.api.dto.SolicitudAdopcionDto;
-import com.aluracursos.adopet.api.exceptions.ValidacionException;
+import com.aluracursos.adopet.api.dto.AprobacionAdopcionDTO;
+import com.aluracursos.adopet.api.dto.ReprobacionAdopcionDTO;
+import com.aluracursos.adopet.api.dto.SolicitudAdopcionDTO;
+import com.aluracursos.adopet.api.exception.ValidacionException;
 import com.aluracursos.adopet.api.service.AdopcionService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,27 +20,26 @@ public class AdopcionController {
 
     @PostMapping
     @Transactional
-    public ResponseEntity<String> solicitar(@RequestBody @Valid SolicitudAdopcionDto dto) {
+    public ResponseEntity<String> solicitar(@RequestBody @Valid SolicitudAdopcionDTO dto) {
         try {
             this.adopcionService.solicitar(dto);
-            return ResponseEntity.ok("Adopción solicitada satisfactoriamente!");
-        } catch (ValidacionException e) {
+            return ResponseEntity.ok("Solicitud enviada satisfactoriamente!");
+        } catch (ValidacionException e){
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PutMapping("/aprobar")
     @Transactional
-    public ResponseEntity<String> aprobar(@RequestBody @Valid AprobacionAdopcionDto dto) {
+    public ResponseEntity<String> aprobar(@RequestBody @Valid AprobacionAdopcionDTO dto) {
         this.adopcionService.aprobar(dto);
-        return ResponseEntity.ok("Solicitud aprobada!");
+        return ResponseEntity.ok("Solicitud aprobada satisfactoriamente!");
     }
 
     @PutMapping("/reprobar")
     @Transactional
-    public ResponseEntity<String> reprobar(@RequestBody @Valid ReprobacionAdopcionDto dto) {
+    public ResponseEntity<String> reprobar(@RequestBody @Valid ReprobacionAdopcionDTO dto) {
         this.adopcionService.reprobar(dto);
         return ResponseEntity.ok("Solicitud reprobada.");
     }
-
 }
