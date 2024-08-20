@@ -3,7 +3,6 @@ package com.aluracursos.adopet.api.service;
 import com.aluracursos.adopet.api.dto.AprobacionAdopcionDTO;
 import com.aluracursos.adopet.api.dto.ReprobacionAdopcionDTO;
 import com.aluracursos.adopet.api.dto.SolicitudAdopcionDTO;
-import com.aluracursos.adopet.api.exceptions.ValidacionException;
 import com.aluracursos.adopet.api.model.Adopcion;
 import com.aluracursos.adopet.api.model.Mascota;
 import com.aluracursos.adopet.api.model.StatusAdopcion;
@@ -16,7 +15,6 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 
 @Service
 public class AdopcionService {
@@ -36,30 +34,9 @@ public class AdopcionService {
     public void solicitar(SolicitudAdopcionDTO dto) {
         Mascota mascota = mascotaRepository.getReferenceById(dto.idMascota());
         Tutor tutor = tutorRepository.getReferenceById(dto.idTutor());
-        if (mascota.getAdoptada() == true) {
-            throw new ValidacionException("Mascota ya fue adoptada!");
-        } else {
-            List<Adopcion> adopciones = adopcionRepository.findAll();
-            for (Adopcion a : adopciones) {
-                if (a.getTutor() == tutor && a.getStatus() == StatusAdopcion.ESPERANDO_EVALUACION) {
-                    throw new ValidacionException("Tutor ya tiene otra adopción esperando evaluación!");
-                }
-            }
-            for (Adopcion a : adopciones) {
-                if (a.getMascota() == mascota && a.getStatus() == StatusAdopcion.ESPERANDO_EVALUACION) {
-                    throw new ValidacionException("Mascota ya esta esperando evaluación para ser adoptada!");
-                }
-            }
-            for (Adopcion a : adopciones) {
-                int contador = 0;
-                if (a.getTutor() == tutor && a.getStatus() == StatusAdopcion.APROBADO) {
-                    contador = contador + 1;
-                }
-                if (contador == 5) {
-                    throw new ValidacionException("Tutor llegó al limite máximo de 5 adopciones!");
-                }
-            }
-        }
+
+        //Llamar las validaciones
+
         Adopcion adopcion = new Adopcion();
         adopcion.setFecha(LocalDateTime.now());
         adopcion.setStatus(StatusAdopcion.ESPERANDO_EVALUACION);
