@@ -10,11 +10,13 @@ import com.aluracursos.adopet.api.model.Tutor;
 import com.aluracursos.adopet.api.repository.AdopcionRepository;
 import com.aluracursos.adopet.api.repository.MascotaRepository;
 import com.aluracursos.adopet.api.repository.TutorRepository;
+import com.aluracursos.adopet.api.validations.ValidacionesSolicitudAdopcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class AdopcionService {
@@ -31,11 +33,14 @@ public class AdopcionService {
     @Autowired
     private EmailService emailService;
 
+    @Autowired
+    private List<ValidacionesSolicitudAdopcion> validaciones;
+
     public void solicitar(SolicitudAdopcionDTO dto) {
         Mascota mascota = mascotaRepository.getReferenceById(dto.idMascota());
         Tutor tutor = tutorRepository.getReferenceById(dto.idTutor());
 
-        //Llamar las validaciones
+        validaciones.forEach(v -> v.validar(dto));
 
         Adopcion adopcion = new Adopcion();
         adopcion.setFecha(LocalDateTime.now());
