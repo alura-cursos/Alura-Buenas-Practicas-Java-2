@@ -68,6 +68,10 @@ public class Adopcion {
         return mascota;
     }
 
+    public void setMascota(Mascota mascota) {
+        this.mascota = mascota;
+    }
+
     public String getMotivo() {
         return motivo;
     }
