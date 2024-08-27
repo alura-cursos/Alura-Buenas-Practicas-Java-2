@@ -15,10 +15,10 @@ public class Adopcion {
 
     private LocalDateTime fecha;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Tutor tutor;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Mascota mascota;
 
     private String motivo;
