@@ -65,79 +65,39 @@ public class Mascota {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public TipoMascota getTipo() {
         return tipo;
-    }
-
-    public void setTipo(TipoMascota tipo) {
-        this.tipo = tipo;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
     public String getRaza() {
         return raza;
-    }
-
-    public void setRaza(String raza) {
-        this.raza = raza;
     }
 
     public Integer getEdad() {
         return edad;
     }
 
-    public void setEdad(Integer edad) {
-        this.edad = edad;
-    }
-
     public String getColor() {
         return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 
     public Float getPeso() {
         return peso;
     }
 
-    public void setPeso(Float peso) {
-        this.peso = peso;
-    }
-
     public Boolean getAdoptada() {
         return adoptada;
-    }
-
-    public void setAdoptada(Boolean adoptada) {
-        this.adoptada = adoptada;
     }
 
     public Refugio getRefugio() {
         return refugio;
     }
 
-    public void setRefugio(Refugio refugio) {
-        this.refugio = refugio;
-    }
-
     public Adopcion getAdopcion() {
         return adopcion;
-    }
-
-    public void setAdopcion(Adopcion adopcion) {
-        this.adopcion = adopcion;
     }
 }
